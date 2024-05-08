@@ -5,11 +5,10 @@
 // buscar y enceontrar mas de una coindencia de proyectos
 // buscar y enceontrar proyectos cuyo nombre empieza con el criterio de busqueda
 // por ejm: "ejerc" y en mi lista tengo "ejercio1", "ejercicio2" -> devuelve ambos
-function buscarProyecto(nombre, proyectos) 
-{
+function buscarProyecto(nombre, proyectos) {
     const coincidencias = [];
     for (const proyecto of proyectos) {
-        if (proyecto === nombre) {
+        if (proyecto === nombre || proyecto.startsWith(nombre)) {
             coincidencias.push(proyecto);
         }
     }
@@ -36,6 +35,11 @@ describe("Buscar", () => {
     it("encuentra varias coincidencias de un proyecto", () => {
         const proyectos = ["proyecto1", "proyecto1", "proyecto3"];
         expect(buscarProyecto("proyecto1", proyectos)).toEqual(["proyecto1", "proyecto1"]);
+    });
+
+    it("encuentra proyectos cuyo nombre empieza con el criterio de búsqueda", () => {
+        const proyectos = ["proyecto1", "proyecto2", "otroProyecto"];
+        expect(buscarProyecto("proyecto", proyectos)).toEqual(["proyecto1", "proyecto2"]);
     });
 });
 
