@@ -12,6 +12,9 @@ function buscarProyecto(nombre, proyectos) {
             coincidencias.push(proyecto);
         }
     }
+    if (coincidencias.length === 0) {
+        return "";
+    }
     return coincidencias;
 }
 
@@ -19,7 +22,7 @@ function buscarProyecto(nombre, proyectos) {
 describe("Buscar", () => {
     it("no encuentra proyectos cuando no se tiene ninguno en la lista de proyectos", () => {     
         const proyectos = [];
-        expect(buscarProyecto("ejercicio1", proyectos)).toEqual([]);
+        expect(buscarProyecto("ejercicio1", proyectos)).toEqual("");
     });
 
     it("encuentra un proyecto cuando el mismo existe en una lista de 1 proyecto", () => {
@@ -41,7 +44,13 @@ describe("Buscar", () => {
         const proyectos = ["proyecto1", "proyecto2", "otroProyecto"];
         expect(buscarProyecto("proyecto", proyectos)).toEqual(["proyecto1", "proyecto2"]);
     });
+
+    it("devuelve una cadena vacía cuando no se encuentra ninguna coincidencia", () => {
+        const proyectos = ["proyecto1", "proyecto2", "otroProyecto"];
+        expect(buscarProyecto("noCoincide", proyectos)).toEqual("");
+    });
 });
+
 
           //Para terminar:
           
